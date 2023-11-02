@@ -75,7 +75,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         Image(
             painter = painterResource(id = R.drawable.poster),
             contentDescription = "There must be poster",
-            modifier = modifier.width(pageWidth)
+            modifier = modifier.fillMaxWidth()
         )
 
         Image(
@@ -84,7 +84,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .background(Color(0xFF050B18), shape = RoundedCornerShape(5.dp))
-                .padding(top = 0.dp, start = 0.dp, end = pageWidth - 88.dp, bottom = 49.dp)
+                .fillMaxWidth()
+                .padding(top = 0.dp, start = 0.dp, end = pageWidth - 80.dp, bottom = 49.dp)
                 .offset(21.dp, -30.dp)
                 .padding(0.dp)
                 .border(
