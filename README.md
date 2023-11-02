@@ -1,11 +1,15 @@
 #### Author
 Kiselev Danil
-[telegram](https://t.me/danilKiselev2855)\n
+
+[telegram](https://t.me/danilKiselev2855)
+
 [github](https://github.com/kiselev-danil)
 
 #### Results
-![image](https://github.com/kiselev-danil/mobile_lab_1/blob/master/preview.jpg)\n
-[Pull Request](https://github.com/kiselev-danil/mobile_lab_1/pull/2)\n
+![image](https://github.com/kiselev-danil/mobile_lab_1/blob/master/preview.jpg)
+
+[Pull Request](https://github.com/kiselev-danil/mobile_lab_1/pull/2)
+
 [apk](https://drive.google.com/file/d/1Lxfncl8_hpbSHMXHpPu-MOVS0UQznp9y/view?usp=sharing)
 
 
