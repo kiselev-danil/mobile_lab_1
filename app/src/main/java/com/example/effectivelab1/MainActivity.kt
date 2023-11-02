@@ -20,8 +20,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,7 +33,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -61,8 +60,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     val pageWidth = 375.dp;
-    val defaultBackgroundColor = Color.Magenta
     val defaultElementBackgroundColor = Color(0xFF050B18)
+    val defaultBackgroundColor = defaultElementBackgroundColor//Color.Magenta
+    val defaultColorModifier: Modifier =
+        Modifier.background(defaultElementBackgroundColor, RectangleShape)
 
     Column(
         modifier = Modifier
@@ -83,17 +84,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             contentDescription = "game logo was there",
             contentScale = ContentScale.Inside,
             modifier = Modifier
-                .background(Color(0xFF050B18), shape = RoundedCornerShape(5.dp))
-                .fillMaxWidth()
-                .padding(top = 0.dp, start = 0.dp, end = pageWidth - 80.dp, bottom = 49.dp)
                 .offset(21.dp, -30.dp)
                 .padding(0.dp)
                 .border(
                     width = 1.dp,
                     color = MaterialTheme.colorScheme.secondary,
-                    shape = RoundedCornerShape(5.dp),
+                    shape = RoundedCornerShape(14.dp),
                 )
-                .background(color = Color.Black, shape = RectangleShape)
+                .background(color = Color.Black, shape = RoundedCornerShape(14.dp))
                 .padding(17.dp)
                 .width(54.dp)
                 .height(54.dp)
@@ -101,7 +99,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
         Text(
             text = "Dota 2 is a multiplayer online battle arena (MOBA) game which has two teams of five players compete to collectively destroy a large structure defended by the opposing team known as the \"Ancient\", whilst defending their own.",
-            style = TextStyle(
+            style = /*MaterialTheme.typography.bodyMedium*/TextStyle(
                 fontSize = 12.sp,
                 lineHeight = 19.sp,
                 fontFamily = FontFamily.SansSerif,
@@ -144,6 +142,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             )
         }
 
+        comments(defaultColorModifier)
+
         Button(
             onClick = { },
             modifier = modifier
@@ -154,10 +154,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 .height(64.dp),
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(
-                Color.Yellow,
-                Color.Black,
-                Color.LightGray,
-                Color.DarkGray
+                Color.Yellow, Color.Black, Color.LightGray, Color.DarkGray
             )
         ) {
             Text(text = "INSTALL")
@@ -166,7 +163,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+
+
+
+@Preview(showBackground = false, showSystemUi = false)
 @Composable
 fun GreetingPreview() {
     EffectiveLab1Theme {
