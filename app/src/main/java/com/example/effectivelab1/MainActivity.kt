@@ -81,7 +81,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         Image(
             painter = painterResource(id = R.drawable.game_logo),
             contentDescription = "game logo was there",
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Inside,
             modifier = Modifier
                 .background(Color(0xFF050B18), shape = RoundedCornerShape(5.dp))
                 .fillMaxWidth()
