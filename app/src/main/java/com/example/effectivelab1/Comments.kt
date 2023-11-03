@@ -82,7 +82,6 @@ fun commentDraw(comment: CommentModel, mod: Modifier) {
         Row(
             modifier = Modifier
                 .padding(horizontal = 0.dp, vertical = 16.dp)
-                .height(40.dp)
         ) {
             Image(
                 painter = comment.image,
