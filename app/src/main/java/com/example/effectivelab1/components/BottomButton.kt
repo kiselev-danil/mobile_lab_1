@@ -12,7 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.effectivelab1.R
 
 @Composable
 fun DrawInstallButton(modifier: Modifier = Modifier) {
@@ -24,6 +27,12 @@ fun DrawInstallButton(modifier: Modifier = Modifier) {
             Color.Yellow, Color.Black, Color.LightGray, Color.DarkGray
         )
     ) {
-        Text(text = "INSTALL")
+        Text(text = stringResource(id = R.string.bottom_button_text))
     }
+}
+
+@Composable
+@Preview
+fun PreviewInstallButtoon(){
+    DrawInstallButton()
 }

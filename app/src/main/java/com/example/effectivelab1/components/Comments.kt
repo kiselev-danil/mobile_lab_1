@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -32,7 +33,7 @@ import com.example.effectivelab1.model.CommentModel
 @Composable
 fun comments(mod: Modifier) {
     Text(
-        text = "Review & Ratings",
+        text = stringResource(id = R.string.reviews_block_label),
         modifier = mod.padding(horizontal = 24.dp, vertical = 0.dp),
         style = TextStyle(
             fontSize = 16.sp,
@@ -46,17 +47,17 @@ fun comments(mod: Modifier) {
     val list: MutableList<CommentModel> = mutableListOf()
     list.add(
         CommentModel(
-            name = "Auguste Conte",
-            date = "February 14, 2019",
-            text = "“Once you start to learn its secrets, there’s a wild and exciting variety of play here that’s unmatched, even by its peers.”",
+            name = stringResource(id = R.string.comment_1_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_1_text),
             painterResource(id = R.drawable.comment1)
         )
     )
     list.add(
         CommentModel(
-            name = "Jang Marcelino",
-            date = "February 14, 2019",
-            text = "“Once you start to learn its secrets, there’s a wild and exciting variety of play here that’s unmatched, even by its peers.”",
+            name = stringResource(id = R.string.comment_2_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_2_text),
             painterResource(id = R.drawable.comment2)
         )
     )
