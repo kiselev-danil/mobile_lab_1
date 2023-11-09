@@ -110,7 +110,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 .align(alignment = Alignment.CenterHorizontally)
                 .background(defaultElementBackgroundColor, shape = RectangleShape)
                 .fillMaxWidth()
-                .width(pageWidth - 24.dp)
                 .padding(start = 24.dp, top = 20.dp, bottom = 43.dp, end = 21.dp)
         )
 
