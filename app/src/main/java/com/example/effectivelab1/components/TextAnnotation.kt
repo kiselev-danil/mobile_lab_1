@@ -14,21 +14,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.effectivelab1.R
+import com.example.effectivelab1.ui.theme.MyTheme
 
 @Composable
 fun DrawTextAnnotation(modifier: Modifier = Modifier) {
     Text(
         text = stringResource(id = R.string.annotation_text),
-        style = TextStyle(
-            fontSize = 12.sp,
-            lineHeight = 19.sp,
-            fontFamily = FontFamily.SansSerif,
-            fontWeight = FontWeight(400),
-            color = Color(0xB2EEF2FB)
-        ),
+        style = MyTheme.TextStyles.textAnnotation,
         modifier = modifier
-            .fillMaxWidth()
-            .padding(start = 24.dp, top = 20.dp, bottom = 43.dp, end = 21.dp)
     )
 }
 //TODO: Move string into resources, move text style into separate file, move colours into Theme.

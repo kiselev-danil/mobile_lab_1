@@ -17,9 +17,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.effectivelab1.R
+import com.example.effectivelab1.ui.theme.MyTheme
 
 @Composable
-fun DrawLogo(modifier: Modifier = Modifier){
+fun DrawLogo(modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(id = R.drawable.game_logo),
         contentDescription = "game logo was there",
@@ -31,7 +32,10 @@ fun DrawLogo(modifier: Modifier = Modifier){
                 color = MaterialTheme.colorScheme.secondary,
                 shape = RoundedCornerShape(14.dp),
             )
-            .background(color = Color.Black, shape = RoundedCornerShape(14.dp))
+            .background(
+                color = MyTheme.Colors.logoBackroundColor,
+                shape = RoundedCornerShape(14.dp)
+            )
             .padding(17.dp)
             .width(54.dp)
             .height(54.dp)
@@ -40,6 +44,6 @@ fun DrawLogo(modifier: Modifier = Modifier){
 
 @Composable
 @Preview
-fun LogoPreview(){
+fun LogoPreview() {
     DrawLogo()
 }

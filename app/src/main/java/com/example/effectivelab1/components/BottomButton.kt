@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.effectivelab1.R
+import com.example.effectivelab1.ui.theme.MyTheme
 
 @Composable
 fun DrawInstallButton(modifier: Modifier = Modifier) {
@@ -24,7 +25,10 @@ fun DrawInstallButton(modifier: Modifier = Modifier) {
         modifier = modifier,
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(
-            Color.Yellow, Color.Black, Color.LightGray, Color.DarkGray
+            MyTheme.Colors.ButtonColors.mainButtonColor,
+            MyTheme.Colors.ButtonColors.contentColor,
+            MyTheme.Colors.ButtonColors.disabledContainerColor,
+            MyTheme.Colors.ButtonColors.disabledContentColor
         )
     ) {
         Text(text = stringResource(id = R.string.bottom_button_text))
@@ -33,6 +37,6 @@ fun DrawInstallButton(modifier: Modifier = Modifier) {
 
 @Composable
 @Preview
-fun PreviewInstallButtoon(){
+fun PreviewInstallButtoon() {
     DrawInstallButton()
 }

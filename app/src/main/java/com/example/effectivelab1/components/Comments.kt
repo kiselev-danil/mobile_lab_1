@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.effectivelab1.R
 import com.example.effectivelab1.model.CommentModel
+import com.example.effectivelab1.ui.theme.MyTheme
 
 
 @Composable
@@ -37,13 +38,7 @@ fun CommetsLabel(modifier: Modifier = Modifier) {
     Text(
         text = stringResource(id = R.string.reviews_block_label),
         modifier = modifier,
-        style = TextStyle(
-            fontSize = 16.sp,
-            fontFamily = FontFamily.SansSerif,
-            fontWeight = FontWeight(700),
-            color = Color(0xFFEEF2FB),
-            letterSpacing = 0.6.sp,
-        )
+        style = MyTheme.TextStyles.commentLabel
     )
 }
 
@@ -66,36 +61,18 @@ fun SingleComment(comment: CommentModel, modifier: Modifier = Modifier) {
             )
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 0.dp)) {
                 Text(
-                    text = comment.name, style = TextStyle(
-                        fontSize = 16.sp,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight(400),
-                        color = Color(0xFFFFFFFF),
-
-                        letterSpacing = 0.5.sp,
-                    )
+                    text = comment.name, style = MyTheme.TextStyles.commentAuthorName
                 )
                 Spacer(modifier = Modifier.size(7.dp))
                 Text(
-                    text = comment.date, style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight(400),
-                        color = Color(0x66FFFFFF),
-                        letterSpacing = 0.5.sp,
-                    )
+                    text = comment.date, style = MyTheme.TextStyles.commentDate
                 )
             }
         }
         Text(
-            text = comment.text, style = TextStyle(
-                fontSize = 12.sp,
-                lineHeight = 20.sp,
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight(400),
-                color = Color(0xFFA8ADB7),
-                letterSpacing = 0.5.sp
-            ), modifier = Modifier.align(Alignment.CenterHorizontally)
+            text = comment.text,
+            style = MyTheme.TextStyles.commentText,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
 }

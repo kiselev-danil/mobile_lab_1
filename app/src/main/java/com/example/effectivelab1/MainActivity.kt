@@ -39,6 +39,7 @@ import com.example.effectivelab1.components.SingleComment
 import com.example.effectivelab1.components.VideoPreview
 import com.example.effectivelab1.model.CommentModel
 import com.example.effectivelab1.ui.theme.EffectiveLab1Theme
+import com.example.effectivelab1.ui.theme.MyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,11 +58,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DrawDotaScreen(name: String, modifier: Modifier = Modifier) {
-    val pageWidth = 375.dp;
-    val defaultElementBackgroundColor = Color(0xFF050B18)
-    val defaultBackgroundColor = defaultElementBackgroundColor//Color.Magenta
-    val defaultColorModifier: Modifier =
-        Modifier.background(defaultElementBackgroundColor, RectangleShape)
     val commentsList: List<CommentModel> = listOf(
         CommentModel(
             name = stringResource(id = R.string.comment_1_author),
@@ -77,8 +73,7 @@ fun DrawDotaScreen(name: String, modifier: Modifier = Modifier) {
     )
     LazyColumn(
         modifier = Modifier
-            .width(pageWidth)
-            .background(color = defaultBackgroundColor, shape = RectangleShape)
+            .background(color = MyTheme.Colors.mainBackgroundColor, shape = RectangleShape)
     ) {
         item {
             DrawHeader(Modifier.fillMaxWidth())
@@ -87,7 +82,11 @@ fun DrawDotaScreen(name: String, modifier: Modifier = Modifier) {
             DrawLogo(Modifier.offset(21.dp, -30.dp))
         }
         item {
-            DrawTextAnnotation()
+            DrawTextAnnotation(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, top = 20.dp, bottom = 43.dp, end = 21.dp)
+            )
         }
         item {
             VideoPreview(
@@ -104,7 +103,7 @@ fun DrawDotaScreen(name: String, modifier: Modifier = Modifier) {
             CommetsLabel(Modifier.padding(24.dp, 0.dp))
         }
         itemsIndexed(commentsList) { index, item ->
-            SingleComment(item, defaultColorModifier)
+            SingleComment(item, Modifier)
             if (index < commentsList.lastIndex) {
                 Divider(
                     color = MaterialTheme.colorScheme.secondary,
