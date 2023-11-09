@@ -3,54 +3,53 @@ package com.example.effectivelab1
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.effectivelab1.components.comments
+import com.example.effectivelab1.components.CommetsLabel
+import com.example.effectivelab1.components.DrawHeader
+import com.example.effectivelab1.components.DrawInstallButton
+import com.example.effectivelab1.components.DrawLogo
+import com.example.effectivelab1.components.DrawTextAnnotation
+import com.example.effectivelab1.components.SingleComment
+import com.example.effectivelab1.components.VideoPreview
+import com.example.effectivelab1.model.CommentModel
 import com.example.effectivelab1.ui.theme.EffectiveLab1Theme
+import com.example.effectivelab1.ui.theme.MyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             EffectiveLab1Theme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    DrawDotaScreen("Android")
                 }
             }
         }
@@ -58,117 +57,76 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val pageWidth = 375.dp;
-    val defaultElementBackgroundColor = Color(0xFF050B18)
-    val defaultBackgroundColor = defaultElementBackgroundColor//Color.Magenta
-    val defaultColorModifier: Modifier =
-        Modifier.background(defaultElementBackgroundColor, RectangleShape)
-
-    Column(
+fun DrawDotaScreen(name: String, modifier: Modifier = Modifier) {
+    val commentsList: List<CommentModel> = listOf(
+        CommentModel(
+            name = stringResource(id = R.string.comment_1_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_1_text),
+            painterResource(id = R.drawable.comment1)
+        ), CommentModel(
+            name = stringResource(id = R.string.comment_2_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_2_text),
+            painterResource(id = R.drawable.comment2)
+        )
+    )
+    LazyColumn(
         modifier = Modifier
-            .width(pageWidth)
-            .background(color = defaultBackgroundColor, shape = RectangleShape)
-            .verticalScroll(
-                state = ScrollState(0), enabled = true
-            )
+            .background(color = MyTheme.Colors.mainBackgroundColor, shape = RectangleShape)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.poster),
-            contentDescription = "There must be poster",
-            modifier = modifier.fillMaxWidth()
-        )
-
-        Image(
-            painter = painterResource(id = R.drawable.game_logo),
-            contentDescription = "game logo was there",
-            contentScale = ContentScale.Inside,
-            modifier = Modifier
-                .offset(21.dp, -30.dp)
-                .padding(0.dp)
-                .border(
-                    width = 1.dp,
+        item {
+            DrawHeader(Modifier.fillMaxWidth())
+        }
+        item {
+            DrawLogo(Modifier.offset(21.dp, -30.dp))
+        }
+        item {
+            DrawTextAnnotation(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, top = 20.dp, bottom = 43.dp, end = 21.dp)
+            )
+        }
+        item {
+            VideoPreview(
+                previews = listOf(
+                    painterResource(id = R.drawable.gameplay_1),
+                    painterResource(id = R.drawable.gameplay_2)
+                ), modifier = Modifier.padding(24.dp, 0.dp, 0.dp, 0.dp)
+            )
+        }
+        item {
+            Spacer(Modifier.size(50.dp))
+        }
+        item {
+            CommetsLabel(Modifier.padding(24.dp, 0.dp))
+        }
+        itemsIndexed(commentsList) { index, item ->
+            SingleComment(item, Modifier)
+            if (index < commentsList.lastIndex) {
+                Divider(
                     color = MaterialTheme.colorScheme.secondary,
-                    shape = RoundedCornerShape(14.dp),
+                    modifier = modifier.padding(horizontal = 38.dp, vertical = 24.dp)
                 )
-                .background(color = Color.Black, shape = RoundedCornerShape(14.dp))
-                .padding(17.dp)
-                .width(54.dp)
-                .height(54.dp)
-        )
-
-        Text(
-            text = "Dota 2 is a multiplayer online battle arena (MOBA) game which has two teams of five players compete to collectively destroy a large structure defended by the opposing team known as the \"Ancient\", whilst defending their own.",
-            style = /*MaterialTheme.typography.bodyMedium*/TextStyle(
-                fontSize = 12.sp,
-                lineHeight = 19.sp,
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight(400),
-                color = Color(0xB2EEF2FB)
-            ),
-            modifier = modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .background(defaultElementBackgroundColor, shape = RectangleShape)
-                .fillMaxWidth()
-                .padding(start = 24.dp, top = 20.dp, bottom = 43.dp, end = 21.dp)
-        )
-
-        Row(
-            modifier = Modifier
-                .horizontalScroll(state = ScrollState(0))
-                .background(defaultElementBackgroundColor, shape = RectangleShape)
-                .padding(start = 24.dp, top = 0.dp, end = 0.dp, bottom = 0.dp)
-                .border(width = 0.dp, shape = RectangleShape, color = Color.Unspecified)
-                .padding(0.dp, 0.dp, 0.dp, 47.dp)
-                .height(135.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.gameplay_1),
-                contentDescription = "image description",
-                contentScale = ContentScale.FillBounds,
-                modifier = modifier
-                    .width(240.dp)
-                    .clip(RoundedCornerShape(5.dp))
-            )
-            Image(
-                painter = painterResource(id = R.drawable.gameplay_2),
-                contentDescription = "image description",
-                contentScale = ContentScale.FillBounds,
-                modifier = modifier
-                    .width(240.dp)
-                    .clip(RoundedCornerShape(5.dp))
+            }
+        }
+        item {
+            DrawInstallButton(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 20.dp, top = 0.dp, bottom = 47.dp)
+                    .height(64.dp)
             )
         }
-
-        comments(defaultColorModifier)
-
-        Button(
-            onClick = { },
-            modifier = modifier
-                .fillMaxWidth()
-                .background(defaultElementBackgroundColor, shape = RectangleShape)
-                .align(Alignment.CenterHorizontally)
-                .padding(start = 20.dp, end = 20.dp, top = 0.dp, bottom = 47.dp)
-                .height(64.dp),
-            shape = RoundedCornerShape(10.dp),
-            colors = ButtonDefaults.buttonColors(
-                Color.Yellow, Color.Black, Color.LightGray, Color.DarkGray
-            )
-        ) {
-            Text(text = "INSTALL")
-        }
-
     }
 }
-
-
 
 
 @Preview(showBackground = false, showSystemUi = false)
 @Composable
 fun GreetingPreview() {
     EffectiveLab1Theme {
-        Greeting("Android")
+        DrawDotaScreen("Android")
     }
 }
