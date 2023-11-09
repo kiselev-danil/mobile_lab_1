@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.effectivelab1.components.DrawLogo
+import com.example.effectivelab1.components.DrawTextAnnotation
 import com.example.effectivelab1.components.comments
 import com.example.effectivelab1.ui.theme.EffectiveLab1Theme
 
@@ -81,20 +82,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             DrawLogo(Modifier.offset(21.dp, -30.dp))
         }
         item {
-            Text(
-                text = "Dota 2 is a multiplayer online battle arena (MOBA) game which has two teams of five players compete to collectively destroy a large structure defended by the opposing team known as the \"Ancient\", whilst defending their own.",
-                style = /*MaterialTheme.typography.bodyMedium*/TextStyle(
-                    fontSize = 12.sp,
-                    lineHeight = 19.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight(400),
-                    color = Color(0xB2EEF2FB)
-                ),
-                modifier = modifier
-                    .background(defaultElementBackgroundColor, shape = RectangleShape)
-                    .fillMaxWidth()
-                    .padding(start = 24.dp, top = 20.dp, bottom = 43.dp, end = 21.dp)
-            )
+            DrawTextAnnotation()
         }
         item {
             Row(
