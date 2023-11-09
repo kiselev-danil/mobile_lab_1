@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
@@ -31,50 +33,22 @@ import com.example.effectivelab1.model.CommentModel
 
 
 @Composable
-fun comments(mod: Modifier) {
+fun CommetsLabel(modifier: Modifier = Modifier) {
     Text(
         text = stringResource(id = R.string.reviews_block_label),
-        modifier = mod.padding(horizontal = 24.dp, vertical = 0.dp),
+        modifier = modifier,
         style = TextStyle(
             fontSize = 16.sp,
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight(700),
             color = Color(0xFFEEF2FB),
-
             letterSpacing = 0.6.sp,
         )
     )
-    val list: MutableList<CommentModel> = mutableListOf()
-    list.add(
-        CommentModel(
-            name = stringResource(id = R.string.comment_1_author),
-            date = stringResource(id = R.string.comment_date),
-            text = stringResource(id = R.string.comment_1_text),
-            painterResource(id = R.drawable.comment1)
-        )
-    )
-    list.add(
-        CommentModel(
-            name = stringResource(id = R.string.comment_2_author),
-            date = stringResource(id = R.string.comment_date),
-            text = stringResource(id = R.string.comment_2_text),
-            painterResource(id = R.drawable.comment2)
-        )
-    )
-    for (i in 1..list.size) {
-        commentDraw(comment = list[i - 1], mod = mod)
-        if (i != list.size) {
-            Divider(
-                color = MaterialTheme.colorScheme.secondary,
-                modifier = mod.padding(horizontal = 38.dp, vertical = 24.dp)
-            )
-        }
-    }
-
 }
 
 @Composable
-fun commentDraw(comment: CommentModel, mod: Modifier) {
+fun SingleComment(comment: CommentModel, modifier: Modifier = Modifier) {
     val imageModifier = Modifier
         .clip(shape = CircleShape)
         .width(36.dp)
@@ -82,8 +56,7 @@ fun commentDraw(comment: CommentModel, mod: Modifier) {
 
     Column(modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp)) {
         Row(
-            modifier = Modifier
-                .padding(horizontal = 0.dp, vertical = 16.dp)
+            modifier = Modifier.padding(horizontal = 0.dp, vertical = 16.dp)
         ) {
             Image(
                 painter = comment.image,
@@ -130,7 +103,34 @@ fun commentDraw(comment: CommentModel, mod: Modifier) {
 @Preview(showBackground = false, showSystemUi = false)
 @Composable
 fun CommentsPreview() {
-    Column {
-        comments(mod = Modifier)
+    val list: List<CommentModel> = listOf(
+        CommentModel(
+            name = stringResource(id = R.string.comment_1_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_1_text),
+            painterResource(id = R.drawable.comment1)
+        ), CommentModel(
+            name = stringResource(id = R.string.comment_2_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_2_text),
+            painterResource(id = R.drawable.comment2)
+        )
+    )
+    LazyColumn {
+        item {
+            CommetsLabel()
+        }
+        itemsIndexed(list) { index, item ->
+            SingleComment(item, Modifier)
+            if (index < list.lastIndex) {
+                Divider(
+                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.padding(horizontal = 38.dp, vertical = 24.dp)
+                )
+            }
+        }
     }
+
+
 }
+

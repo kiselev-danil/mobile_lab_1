@@ -13,21 +13,31 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.effectivelab1.components.CommetsLabel
 import com.example.effectivelab1.components.DrawHeader
 import com.example.effectivelab1.components.DrawInstallButton
 import com.example.effectivelab1.components.DrawLogo
 import com.example.effectivelab1.components.DrawTextAnnotation
+import com.example.effectivelab1.components.SingleComment
 import com.example.effectivelab1.components.VideoPreview
-import com.example.effectivelab1.components.comments
+import com.example.effectivelab1.model.CommentModel
 import com.example.effectivelab1.ui.theme.EffectiveLab1Theme
 
 class MainActivity : ComponentActivity() {
@@ -52,7 +62,19 @@ fun DrawDotaScreen(name: String, modifier: Modifier = Modifier) {
     val defaultBackgroundColor = defaultElementBackgroundColor//Color.Magenta
     val defaultColorModifier: Modifier =
         Modifier.background(defaultElementBackgroundColor, RectangleShape)
-
+    val commentsList: List<CommentModel> = listOf(
+        CommentModel(
+            name = stringResource(id = R.string.comment_1_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_1_text),
+            painterResource(id = R.drawable.comment1)
+        ), CommentModel(
+            name = stringResource(id = R.string.comment_2_author),
+            date = stringResource(id = R.string.comment_date),
+            text = stringResource(id = R.string.comment_2_text),
+            painterResource(id = R.drawable.comment2)
+        )
+    )
     LazyColumn(
         modifier = Modifier
             .width(pageWidth)
@@ -79,7 +101,16 @@ fun DrawDotaScreen(name: String, modifier: Modifier = Modifier) {
             Spacer(Modifier.size(50.dp))
         }
         item {
-            comments(defaultColorModifier)
+            CommetsLabel(Modifier.padding(24.dp, 0.dp))
+        }
+        itemsIndexed(commentsList) { index, item ->
+            SingleComment(item, defaultColorModifier)
+            if (index < commentsList.lastIndex) {
+                Divider(
+                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = modifier.padding(horizontal = 38.dp, vertical = 24.dp)
+                )
+            }
         }
         item {
             DrawInstallButton(
