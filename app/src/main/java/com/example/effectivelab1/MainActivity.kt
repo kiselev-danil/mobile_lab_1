@@ -10,11 +10,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,8 +39,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.effectivelab1.components.DrawHeader
+import com.example.effectivelab1.components.DrawInstallButton
 import com.example.effectivelab1.components.DrawLogo
 import com.example.effectivelab1.components.DrawTextAnnotation
+import com.example.effectivelab1.components.VideoPreview
 import com.example.effectivelab1.components.comments
 import com.example.effectivelab1.ui.theme.EffectiveLab1Theme
 
@@ -72,11 +77,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             .background(color = defaultBackgroundColor, shape = RectangleShape)
     ) {
         item {
-            Image(
-                painter = painterResource(id = R.drawable.poster),
-                contentDescription = "There must be poster",
-                modifier = modifier.fillMaxWidth()
-            )
+            DrawHeader(Modifier.fillMaxWidth())
         }
         item {
             DrawLogo(Modifier.offset(21.dp, -30.dp))
@@ -85,53 +86,26 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             DrawTextAnnotation()
         }
         item {
-            Row(
-                modifier = Modifier
-                    .horizontalScroll(state = ScrollState(0))
-                    .background(defaultElementBackgroundColor, shape = RectangleShape)
-                    .padding(start = 24.dp, top = 0.dp, end = 0.dp, bottom = 0.dp)
-                    .border(width = 0.dp, shape = RectangleShape, color = Color.Unspecified)
-                    .padding(0.dp, 0.dp, 0.dp, 47.dp)
-                    .height(135.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.gameplay_1),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = modifier
-                        .width(240.dp)
-                        .clip(RoundedCornerShape(5.dp))
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.gameplay_2),
-                    contentDescription = "image description",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = modifier
-                        .width(240.dp)
-                        .clip(RoundedCornerShape(5.dp))
-                )
-            }
+            VideoPreview(
+                previews = listOf(
+                    painterResource(id = R.drawable.gameplay_1),
+                    painterResource(id = R.drawable.gameplay_2)
+                ), modifier = Modifier.padding(24.dp, 0.dp, 0.dp, 0.dp)
+            )
+        }
+        item {
+            Spacer(Modifier.size(50.dp))
         }
         item {
             comments(defaultColorModifier)
         }
         item {
-            Button(
-                onClick = { },
-                modifier = modifier
+            DrawInstallButton(
+                Modifier
                     .fillMaxWidth()
-                    .background(defaultElementBackgroundColor, shape = RectangleShape)
                     .padding(start = 20.dp, end = 20.dp, top = 0.dp, bottom = 47.dp)
-                    .height(64.dp),
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    Color.Yellow, Color.Black, Color.LightGray, Color.DarkGray
-                )
-            ) {
-                Text(text = "INSTALL")
-            }
-
+                    .height(64.dp)
+            )
         }
     }
 }
